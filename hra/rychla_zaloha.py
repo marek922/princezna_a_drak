@@ -1,0 +1,1 @@
+# sem si zkopíruji kod před upravou, kdyby se úprava nepovedla, ať se mám k čemu vrátit
