@@ -10,6 +10,7 @@ class Kostka:
     def __str__(self):# Vrací textovou hodnotu kosty
         return str (f"Kostla s {self._pocet_stran} stěnami")
 
-sestisnna=Kostka()  # zkušenobní kostky přijdou smazat
+sestisnna=Kostka()
 
-desetistena=Kostka(12) # zkušenobní kostky přijdou smazat
+desetistena=Kostka(12)
+
