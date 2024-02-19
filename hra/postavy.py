@@ -161,6 +161,6 @@ Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sic
             del self.ucinek_veci[index] # vymaže účinek zvolené položky
 
 
-hrdina=Hrdina(None,10,10,10,10,kostka.desetistena,10) # instalce Hlavního hrdiny
-drak=Postava("Šmak", 20, 20, 20, 10, kostka.sestisnna) # instalce Hlavního záporáka
+hrdina=Hrdina(None,10,10,10,10,kostka.desetistena,10) # instance Hlavního hrdiny
+drak=Postava("Šmak", 20, 20, 20, 10, kostka.sestisnna) # instance Hlavního záporáka
 

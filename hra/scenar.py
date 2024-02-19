@@ -52,7 +52,7 @@ while celkem != pokus_cislo: # postupné přiřazování hodnot pomocí funkce "
         Tak teď už jich máš jen {pokus_cislo}\n """)
 
 
-print("Povedlo se :)\n")
+print("Povedlo se:)\n")
 
 time.sleep(2)
 

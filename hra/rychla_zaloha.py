@@ -1,2 +1,2 @@
-# soubor pro rychlé nezávazné ukládání kodů pro další potřebu
+# soubor pro rychlé nezávazné ukládání kodů pro další potřebu a případnou úpravu
 

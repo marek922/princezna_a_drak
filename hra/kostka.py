@@ -15,5 +15,5 @@ class Kostka:
 
 sestisnna=Kostka() # základní kostka
 
-desetistena=Kostka(12)  # 12-stěná kostka, lze zíksat po splnění úkolu ve jeskyni
+desetistena=Kostka(12)  # 12 - stěná kostka, lze zíksat po splnění úkolu ve jeskyni
 

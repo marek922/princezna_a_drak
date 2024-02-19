@@ -1,7 +1,7 @@
 import random
 from postavy import hrdina
 
-class Les1:
+class Les1: #nizka obtiznost
     def __init__(self):
 
         self.seznam_nalez = ["obyčejná voda","běžný meč","obyčený štít","kniha","boruvka"]
@@ -35,7 +35,7 @@ class Les1:
 les1=Les1()
 
 
-class Les2:
+class Les2:#stredni obtiznost
     def __init__(self):
         self.seznam_nalez = ["pramenitá voda","prvotřídní meč","bytelný štít","velmi tlustá kniha"," čerstvá boruvka"]
         self.popis_nalez = ["doplnit životy", "vylepšit tvůj utok", "zdokonalit tvou obranu", "stat se chytřejším",
@@ -69,7 +69,7 @@ class Les2:
 
 les2 = Les2()
 
-class Les3:
+class Les3: #nejvyssí obtiznost
     def __init__(self):
         self.seznam_nalez = ["křisťálová voda","legendární meč","nebyčejný štít","zajímavá kniha","výborná boruvka"]
         self.popis_nalez = ["doplnit životy", "vylepšit tvůj utok", "zdokonalit tvou obranu", "stat se chytřejším",

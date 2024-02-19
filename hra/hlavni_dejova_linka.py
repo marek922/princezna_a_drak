@@ -186,7 +186,7 @@ class Ukol_4: # 4 ukol na hádání hesla do věže
 
     def __init__(self):
         """
-        slova jsou možnosti, z kterých může program vybírat
+        slova je seznam možností, z kterých může program vybírat
         náhodné slovo je slovo, který prohram vybral
         počet pokusů je počet pokusů , který hráč má, než mu začnou mizet životy
         """
