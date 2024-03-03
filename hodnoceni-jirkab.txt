@@ -1,0 +1,13 @@
+Ceníme práci na projektu! 🏆 Prohlédli jsme si kód a máme k němu následující poznámky:
+
+1. Pojmenování identifikátorů - viz dále
+2. Dodržení principů SRP a SoC - ok
+3. Vhodný výběr datových typů - N/A
+4. Formátování kódu - ok
+5. Duplicitní kód a nekonečné cykly - úkoly mohly být v poli a mít tím pádem jednotné zpracování namísto podmínkování, u kterého jsme
+6. Validace vstupních dat - ano
+7. Logičnost a složitost - atribut hlad ve skutečnosti znamená opak? Zvýšení hladu oddálí hlad, zatímco metoda jez() hlad snižuje, a tedy dříve začne postava ztrácet životy. Desetistěnná kostka má dvanáct stran, hráč ji dostane na začátku, ale také mu ji slibuje Glum jako odměnu (i když tu kostku hráč už od začátku má).
+8. Komentáře - jsou, včetně dokumentačních
+9. Celkové hodnocení - zajímavá a originální aplikace/hra, prospělo by ujasnění některých prvků a zjednodušení práce s úkoly, aby došlo k omezení duplicitního zpracování
+
+Doporučujeme případné výtky v kódu opravit, abyste jej mohli pak prezentovat budoucímu zaměstnavateli v co nejlepší kvalitě. Pokud byste potřebovali s čímkoli pomoci, naplánujte si s námi konzultaci, rádi vám poradíme!
