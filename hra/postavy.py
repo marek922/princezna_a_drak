@@ -119,6 +119,7 @@ Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sic
         """
         return self.graficky_ukazatel(self.hlad, self.max_hlad, "hladu")
 
+    hrdina_ma_tlumok="ano"
     seznam_veci=[] # sem se ukládá název nalezenách věcí
     popis_veci=[] # sem se ukládá popis nalezených věcí
     ucinek_veci=[] # sem se ukládá účinek nalezených věcí.
@@ -129,8 +130,13 @@ Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sic
         """
         Vypíše veškerý obsah v seznamu věcí, společně s jeho popisem a účinky
         """
-        for polozka in range(len(self.seznam_veci)):
-            print(f"{polozka} - {self.seznam_veci[polozka]} - Pomúže ti {self.popis_veci[polozka]} - Díky tomu máš vylepšení {self.ucinek_veci[polozka]}")
+        if len(hrdina.seznam_veci)==0:
+            print()
+            print("Bohužel, tvůj tlumok zeje prázdnotou ")
+        else:
+            print("V tlumoku máš následující věci:")
+            for polozka in range(len(self.seznam_veci)):
+                print(f"{polozka} - {self.seznam_veci[polozka]} - Pomúže ti {self.popis_veci[polozka]} - Díky tomu máš vylepšení {self.ucinek_veci[polozka]}")
         print()
         print(f"Tvoje aktální schopnosti jsou: Životy: {self.zivoty}, Útok: {self.utok}, Obrana: {self.obrana}, Inteligence: {self.inteligence}, Hlad: {self.hlad},\n")
 
@@ -139,8 +145,13 @@ Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sic
         Podle zvoleného indexu aplikuje vylepšní dané položky a tu násleně ze seznamu smaže
         :return: Vylepšné atributy a aktulizivaný seznam věcí
         """
-        index=int(input("Kterou položku chceš využít?\n"))
-        if index <0 or index > len(self.seznam_veci):
+        try:
+            index=int(input("Kterou položku chceš využít?\n")) # uživatel zádá jakou položku che použít
+        except ValueError:
+            print("Zadávej jen čísla, jinak ti nebudu rozument.") # pokud nezadá číslo, ale slovo tak se hodnota nastaví na číslo přesahující požadovaný limit
+            index=len(hrdina.seznam_veci)+2
+
+        if index <0 or index >= len(self.seznam_veci):
             print("Netuším, jak jsi na to přišel, ale takovou položku v tlumoku nemáš")
         else:
             if "voda" in self.seznam_veci[index]: # pokud položka pod zvoleným indexem obsahuje slovo "voda" tak zvedne úroveň životů
@@ -155,7 +166,7 @@ Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sic
                 self.hlad += int(self.ucinek_veci[index])
 
             print(f"Skvěle, použil jsi {self.seznam_veci[index]}")
-            print(f"Tvoje aktální schopnosti jsou: Životy: {self.zivoty}, Útok: {self.utok}, Obrana: {self.obrana}, Inteligence: {self.inteligence}, Hlad: {self.hlad},")
+            #print(f"Tvoje aktální schopnosti jsou: Životy: {self.zivoty}, Útok: {self.utok}, Obrana: {self.obrana}, Inteligence: {self.inteligence}, Hlad: {self.hlad},")
             del self.seznam_veci[index] # vymaže název zvolené položky
             del self.popis_veci[index] # vymaže popis zvolené položky
             del self.ucinek_veci[index] # vymaže účinek zvolené položky

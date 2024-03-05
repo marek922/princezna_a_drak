@@ -69,15 +69,15 @@ class Ukol_2:
         """
         Textový úvod do hry s hádankami
         """
-        return str(f""" Procházíš se krajinou, přes pole a lesy přímo k věži. Když najednou narazíš na jeskyni. 
+        return str(f"""     Procházíš se krajinou, přes pole a lesy přímo k věži. Když najednou narazíš na jeskyni. 
         Zvědavost ti nedá a nahlídneš dovnitř. A koho tam nevidíš - Glum si pochutnává na čerstvé rybičce a ty už určitě 
         moc dobře víš, jaká je Glumova oblíbená hra. Ano, hádanky. Slíbil ti, že když uhodneš 2 ze 3 hádanek, pomůže ti 
-        zachránit princeznu:) Když se ti to ale nepovede, přijdeš o všechny předměty v tlumoku.""")
+        zachránit princeznu:) Když se ti to ale nepovede, přijdeš o celý tlumok a předměty v něm.""")
 
     hadanky={"cas":"Pohltí: ptáky, stromy, květiny. Kouše ocel, drtí tvrdé kameny na mouku, zabíjí krále a ničí města.",
             "tma":"Nemůže být viděno, nemůže být slyšeno. Leží za hvězdami a pod horami a prázdné díry vyplňuje. Končí život, zabíjí smích",
             "vitr":"Bez hlasu křičí, bez křídel létá, bez zubů kouše, bez úst šeptá. Co to je?",
-            "slib":"Co můžeš vzít, zachránit nebo zlomit, ale nikdy nemůžeš vidět?",
+            "slib":"Co můžeš dát, zachovat nebo porušit, ale nikdy nemůžeš vidět?",
             "sen":"Co můžeš vidět, ale nikdy se toho dotknout",
             "tajemstvi":"Když ho máš, chceš ho sdílet, když ho sdílíš, tak ho nemáš",
             "ozvena":"Mluví a nemá ústa, slyší a nemá uši. Nemá tělo, ale ožije hlasem.",
@@ -95,6 +95,7 @@ class Ukol_2:
             nahodna_hadanka = random.choice(list(self.hadanky.keys())) # vebre náhodnou hádanku ze slovníku
             print (self.hadanky[nahodna_hadanka]) #vypíše prve vybranou hádnku
             odpoved=str(input("Co je to? (jedno slovo bez diakritiky)\n")).lower() # převede odpověď na malá písmena
+            print()
             if odpoved == nahodna_hadanka:
                 self.spravna_odpoved+=1
                 print("Nevím, jak je to možné, ale uhodl jsi.")
@@ -111,10 +112,11 @@ class Ukol_2:
             hrdina.hlad += 5
 
         else:
-            print("Neporazil jsi mě, ale nic si z toho nedelěj. Nejsi první, ani poslední. Nech tu všechny svoje věci a teď táhni, odkud jsi přišel")
+            print("Neporazil jsi mě, ale nic si z toho nedelěj. Nejsi první, ani poslední. Nech tu celý tlumok a teď táhni, odkud jsi přišel")
             hrdina.seznam_veci.clear() # smaže položky v seznnamu věci u hrdniny
             hrdina.popis_veci.clear() # smaže položky v poposu věci u hrdiny
             hrdina.ucinek_veci.clear() # smaže položky v ucinku věcci u hrdiny
+            hrdina.hrdina_ma_tlumok="ne"
 
 ukol2=Ukol_2()
 
@@ -130,7 +132,7 @@ class Ukol_3: # 3 . úkol s vojákem a hra kámen nůžky papír
         """
         Textový úvod k úkolu s vojákem
         """
-        return str(f""" Jdeš okolo tábora žoldáků, když tu zahlédneš vojáka, jak si leští stříbrný štít. 
+        return str(f"""     Jdeš okolo tábora žoldáků, když tu zahlédneš vojáka, jak si leští stříbrný štít. 
         Mimoděk mu ho pochválíš. Poděkuje a posteskne si, že už nemá s kým hrát kámen nůžky papír. Pak se zamyslí a řekne:
         Nechceš si se mnou zahrát ty? Když mě porazíš, dám ti tenhle štít, když tě ale porazím já, dáš mi svůj meč:).\n""")
 
@@ -175,9 +177,18 @@ class Ukol_3: # 3 . úkol s vojákem a hra kámen nůžky papír
         if volba ==2:
             print("Mávneš nad tím rukou a pokračuješ dál ")
         if volba ==3:
-            print("Sotva jsi šáhl po meči, tak ti voják přiložil ten svůj ke krku. Tohle si jsi neměl dělat. ")
-            print("Přicházíš o 10 životů a na tohle setkání už jen tak nezapomeneš ")
-            hrdina.zivoty-=10 # ubere hrdinovy životy
+            nahoda=random.randint(1,3)
+            if nahoda == 1 or 2:
+                print("Sotva jsi šáhl po meči, tak ti voják přiložil ten svůj ke krku. Tohle si jsi neměl dělat. ")
+                print("Přicházíš o 10 životů a na tohle setkání už jen tak nezapomeneš ")
+                hrdina.zivoty-=10 # ubere hrdinovy životy
+            else:
+                print("Dříve než si voják uvědomil co se děje, tak jsi ho prašil jílcem meče a i se štítem jsi utekl pryč.")
+                hrdina.seznam_veci.append("Vojákův štít")  # přidání štítů a všch jeho astributů do příslušných seznamů.
+                hrdina.popis_veci.append("vylepšit tvoji obranu")
+                hrdina.ucinek_veci.append(5)
+                hrdina.hlad += 5
+
 
 
 ukol3=Ukol_3()
@@ -197,7 +208,7 @@ class Ukol_4: # 4 ukol na hádání hesla do věže
         """
         Textový úvod k úkolu se vstupem do věže
         """
-        return str(f""" Konečně jsi došel až k věži. Je vyšší než jsi očekával. Zkoušíš zaklepat, ale nic se neděje. 
+        return str(f"""     Konečně jsi došel až k věži. Je vyšší než jsi očekával. Zkoušíš zaklepat, ale nic se neděje. 
         Na bráně je jen vybledý nápis: vložte heslo a na zemi okolo je spousta rozházených písmenek. Zkusíš zadat správné heslo?\n """)
 
     def zadej_heslo (self):
@@ -249,7 +260,7 @@ class Ukol_5:
         self.vytrvalost=2
 
     def __str__(self):
-        return str(f""" Rozrazil jsi veliké dveře, procházíš útrobami věže, ale po princezně ani památky.
+        return str(f"""     Rozrazil jsi veliké dveře, procházíš útrobami věže, ale po princezně ani památky.
 Stoupáš po schodech nahoru do posledního patra. Když v tu jí uvidíš spát na posteli. Chceš ji probudit 
 polibkem, tak jak se to v pohádkách přeci dělá. Když v tom něco zaslechneš a za tebou se objeví veliký drak. 
 Není čas na zbyt, hurá do boje. 
@@ -284,9 +295,10 @@ Konec vsuvky a hurá do boje""")
                         self.postava1.utoc(self.postava2)
                 print()
                 print(f"tvoje aktuální vytrvalost je {self.vytrvalost}")
-                print(f"tvoje aktuální zdraví je: {self.postava1.graficky_zivot()}")
-                print(f"tvoje aktuální míra nasycení je: {self.postava1.graficky_hlad()}")
-                print(f"Drakovy životy jsou {self.postava2.graficky_zivot()}\n")
+                print(f"{self.postava1.graficky_zivot()}")
+                print(f"{self.postava1.graficky_hlad()}")
+                print(f"Drakuv {self.postava2.graficky_zivot()}\n")
+                print()
 
             if styl_boje==2:
                 self.vytrvalost+=1
@@ -295,8 +307,11 @@ Konec vsuvky a hurá do boje""")
                 self.postava2.utoc(self.postava1)
                 print()
                 print(f"tvoje aktuální vytrvalost je {self.vytrvalost}")
-                print(f"tvoje aktuální zdraví je: {self.postava1.graficky_zivot()}")
-                print(f"tvoje aktuální míra nasycení je: {self.postava1.graficky_hlad()}")
-                print(f"Drakovy životy jsou {self.postava2.graficky_zivot()}\n")
+                print(f"{self.postava1.graficky_zivot()}")
+                print(f"{self.postava1.graficky_hlad()}")
+                print(f"Drakuv {self.postava2.graficky_zivot()}\n")
+                print()
 
 ukol5=Ukol_5(hrdina,drak)
+
+

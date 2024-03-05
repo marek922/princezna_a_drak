@@ -64,7 +64,7 @@ class Les2:#stredni obtiznost
             return str(f""""Šel jsi hlouběji do lesa se a našel jsi následující:
             {self.seznam_nalez[self.nahodny_index]}. tahle věc ti pomůže {self.popis_nalez[self.nahodny_index]}, přidá ti {self.ucinek_nalez[self.nahodny_index]}""")
         except IndexError:
-            return str("Ty jsi tu díru vážně neviděl? Přicházíš o 4 životy")
+            return str("Ty jsi tu díru vážně neviděl? Přicházíš o 4 životy ")
 
 
 les2 = Les2()

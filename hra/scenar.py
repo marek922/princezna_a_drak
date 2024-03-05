@@ -1,5 +1,4 @@
 import random
-
 import hlavni_dejova_linka
 from hlavni_dejova_linka import Ukol_1
 import udalosti
@@ -7,11 +6,13 @@ from kostka import sestisnna
 import time
 from postavy import hrdina
 
-print("X" * 80+"\n")
+print("X" * 80 + "\n")
 print(""" Ahoj dobrodruhu, zaslechl jsem, že v nedaleké věži je uvězněná princezna.
 Nechceš se ji pokusit vysvobodit? Stejně nemáš nic lepšího na práci.
 Nebude to jednoduché, ale ty se přeci ničeho nebojíš\n""")
-print("X" * 80+"\n")
+print("X" * 80 + "\n")
+
+pocatecni_cas = time.time()
 
 vlastni_jmeno = str(input("Jak ti máme říkat dobrodruhu?\n"))
 
@@ -35,7 +36,7 @@ def zadani_hodnot(text):
 celkem = 0
 pokus_cislo = 10
 
-while celkem != pokus_cislo: # postupné přiřazování hodnot pomocí funkce "zadání hodnot" k atribitům a následná kontrola, za byl přiřazen správný počet
+while celkem != pokus_cislo:  # postupné přiřazování hodnot pomocí funkce "zadání hodnot" k atribitům a následná kontrola, za byl přiřazen správný počet
     zivot_dodatek = zadani_hodnot(("Kolik bodů přičteš k životům? Čím více, tím odolnější budeš\n"))
     utok_dodatek = zadani_hodnot("Kolik bodů přičteš k útoku? Čím více, tím větší rány budeš rozdávat\n")
     obrana_dodatek = zadani_hodnot("Kolik bodů přičteš k obraně? Čím více, tím silnější tvůj štít bude\n")
@@ -51,24 +52,22 @@ while celkem != pokus_cislo: # postupné přiřazování hodnot pomocí funkce "
         print(f"""Kdepak, podvádět se nevyplácí. Říkal jsem ti, jen 10. Tobě to bylo málo co?
         Tak teď už jich máš jen {pokus_cislo}\n """)
 
-
 print("Povedlo se:)\n")
 
 time.sleep(2)
 
-hrdina.jmeno=vlastni_jmeno     # přičtení zadaných atributů, k základním atributům hrdiny
-hrdina.zivoty+=zivot_dodatek
-hrdina.utok+=utok_dodatek
-hrdina.obrana+=obrana_dodatek
-hrdina.inteligence+=inteligence_dodatek
-hrdina.hlad+=hlad_dodatek
-hrdina.max_zivot+=zivot_dodatek
-hrdina.max_hlad+=hlad_dodatek
-print(hrdina) # vypsání instance hrdina
+hrdina.jmeno = vlastni_jmeno  # přičtení zadaných atributů, k základním atributům hrdiny
+hrdina.zivoty += zivot_dodatek
+hrdina.utok += utok_dodatek
+hrdina.obrana += obrana_dodatek
+hrdina.inteligence += inteligence_dodatek
+hrdina.hlad += hlad_dodatek
+hrdina.max_zivot += zivot_dodatek
+hrdina.max_hlad += hlad_dodatek
+print(hrdina)  # vypsání instance hrdina
 
 print()
 print()
-
 
 time.sleep(2)
 
@@ -82,10 +81,32 @@ když stiskneš 5 - Zopakuji ti tvé možnosti
 Tak a teď už vážně hurá za princeznou""")
 print(pokyny)
 
+def prvni_ukol(): # pokyny k prvnímu ukolu
+    ukol1 = Ukol_1(hrdina.inteligence)
+    print(ukol1)
+    ukol1.hadej()
+
+def druhy_ukol(): # pokyny k druhému ukolu
+    print(hlavni_dejova_linka.ukol2)
+    print()
+    hlavni_dejova_linka.ukol2.hadej_hadanku()
+
+def treti_ukol(): # pokyny k třetímu ukolu
+    print(hlavni_dejova_linka.ukol3)
+    print()
+    hlavni_dejova_linka.ukol3.kamen_nuzky_papir()
+
+
+seznam_ukolu=[prvni_ukol,druhy_ukol,treti_ukol] #seznam dostupných úkolů
+
+def aktyvni_ukol(): # náhodně vybere úkol ze seznamu, spustí ho a pak smaže, aby se neopakoval
+    ukol=random.choice(seznam_ukolu)
+    ukol()
+    seznam_ukolu.remove(ukol)
 
 pokrok = 0
 
-while hrdina.je_nazivu(): # samotný průběh hrou
+while hrdina.je_nazivu():  # samotný průběh hrou
     while True:
         try:
             print()
@@ -99,52 +120,48 @@ while hrdina.je_nazivu(): # samotný průběh hrou
          ale můžeš najít zajímavější věci. Jedna jednotka procházky, sníží tvoji uroveň najezení o 1.
 
          Můžeš jít o 1 jednotku, o 3 jednotky, nebo o 5 jednotek 
-          
+
          Tak o kolik půjdeš? (1/3/5)\n"""))
 
-        if delka_chuze == 1: #spustí procházení v lese s nejniží obtížností
+        if delka_chuze == 1:  # spustí procházení v lese s nejniží obtížností
             udalosti.les1.prochazej_se()
             print(udalosti.les1)
             hrdina.jez()
 
-        if delka_chuze == 3: #spustí procházení v lese s prostřední obtížností
+        if delka_chuze == 3:  # spustí procházení v lese s prostřední obtížností
             udalosti.les2.prochazej_se()
             print(udalosti.les2)
             for z in range(3):
                 hrdina.jez()
 
-        if delka_chuze == 5: #spustí procházení v lese s nejtěžší obtížností
+        if delka_chuze == 5:  # spustí procházení v lese s nejtěžší obtížností
             udalosti.les3.prochazej_se()
             print(udalosti.les3)
             for z in range(5):
                 hrdina.jez()
 
-
-    if volba == 2: # funkce na práci s předměty
-        hrdina.vypis_veci()
-        pouzit = str(input("Chceš něco z toho použít? ano/ne\n")).lower()
-        print()
-        if pouzit == "ano":
-            hrdina.pouzij()
-        if pouzit == "ne":
+    if volba == 2:  # funkce na práci s předměty
+        if hrdina.hrdina_ma_tlumok == "ano":
+            hrdina.vypis_veci()
+            pouzit = None
+            if len(hrdina.seznam_veci) != 0:
+                while pouzit != "ne" and len(hrdina.seznam_veci) != 0:
+                    pouzit = str(input("Chceš něco z toho použít? ano/ne\n")).lower()
+                    print()
+                    if pouzit == "ano":
+                        hrdina.pouzij()
+                        print()
+                        hrdina.vypis_veci()
+                    elif pouzit != "ano" and pouzit != "ne":
+                        print("Sorry jako, ale tomuhle příkazu jsem vážně nerozumněl. ")
             print("Tak jsi se podíval a můžeme jít dál")
-        elif pouzit != "ano" and pouzit != "ne":
-            print("Sorry jako, ale tomuhle příkazu jsem vážně nerozumněl. ")
+        else:
+            print("Bohužel žádný tlumok nemáš, musel jsi ho nechsat u gluma ")
 
-    if volba ==3:
+    if volba == 3: # spuštění samotných úkolů důležitých o záchraně princezny
         pokrok += 1
-
-        if pokrok == 1:
-            ukol1=Ukol_1(hrdina.inteligence)
-            print(ukol1)
-            ukol1.hadej()
-        if pokrok == 2:
-            print(hlavni_dejova_linka.ukol2)
-            print()
-            hlavni_dejova_linka.ukol2.hadej_hadanku()
-        if pokrok == 3:
-            print(hlavni_dejova_linka.ukol3)
-            hlavni_dejova_linka.ukol3.kamen_nuzky_papir()
+        if pokrok <4:
+            aktyvni_ukol()
         if pokrok == 4:
             print(hlavni_dejova_linka.ukol4)
             hlavni_dejova_linka.ukol4.zadej_heslo()
@@ -154,6 +171,10 @@ while hrdina.je_nazivu(): # samotný průběh hrou
 
             if hrdina.je_nazivu():
                 print("Gratuluji, vyhrál jsi - princezna je tvoje ")
+                finalni_cas = time.time()
+                cas_dohrani_minuty = int((finalni_cas - pocatecni_cas) / 60)
+                cas_dohrani_vteriny = int((finalni_cas - pocatecni_cas) % 60)
+                print(f"Hru jsi dohrál za  {cas_dohrani_minuty} minuty a {cas_dohrani_vteriny} vteřin")
                 break
 
     if volba == 4:
@@ -167,3 +188,7 @@ if hrdina.je_nazivu():
 else:
     print()
     print("Je mi líto, zemřel jsi. Zkus to znovu, třeba budeš mít více štěstí. ")
+    finalni_cas = time.time()
+    cas_dohrani_minuty = int((finalni_cas - pocatecni_cas) / 60)
+    cas_dohrani_vteriny = int((finalni_cas - pocatecni_cas) % 60)
+    print(f"Ve hře jsi vydržel přesně {cas_dohrani_minuty} minuty a {cas_dohrani_vteriny} vteřin")
