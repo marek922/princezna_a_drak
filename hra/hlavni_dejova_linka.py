@@ -49,7 +49,7 @@ Souhlasíš, ale poprosíš je alespoň o malinkou nápovědu. Prý je to něco 
                 hrdina.seznam_veci.append("Vzácný meč od dětí")
                 hrdina.popis_veci.append("vylepšit tvůj utok")
                 hrdina.ucinek_veci.append(5)
-                hrdina.hlad+=5
+                hrdina.zasoba_jidla+=5
             self.pocet_pokusu -= 1
             self.i+=1
         if self.pocet_pokusu == 0 and self.odpoved!=self.cislo:
@@ -108,8 +108,8 @@ class Ukol_2:
         if self.spravna_odpoved >1:
             print("""Glum nevěřícně kroutí hlavou. Přehrál jsi mě, to je pravda, a já slib dodržím,
             Princenu hlídá zlý drak Šmak. Tady máš 12-stěnou kostku s kterou ho snáze porazíš.""")
-            hrdina.kostka=kostka.desetistena # uprava hrdinovy kostky
-            hrdina.hlad += 5
+            hrdina.kostka=kostka.dvanactistena # uprava hrdinovy kostky
+            hrdina.zasoba_jidla += 5
 
         else:
             print("Neporazil jsi mě, ale nic si z toho nedelěj. Nejsi první, ani poslední. Nech tu celý tlumok a teď táhni, odkud jsi přišel")
@@ -170,7 +170,7 @@ class Ukol_3: # 3 . úkol s vojákem a hra kámen nůžky papír
                 hrdina.seznam_veci.append("Vojákuv štít") # přidání štítů a všch jeho astributů do příslušných seznamů.
                 hrdina.popis_veci.append("vylepšit tvůji obranu")
                 hrdina.ucinek_veci.append(5)
-                hrdina.hlad += 5
+                hrdina.zasoba_jidla += 5
             else:
                 print("Tak jsem zas vyhrál. Už to začíná být nuda. Dej mi svůj meč a pokračuj dál. ")
                 hrdina.utok-=5 # odebere hrdinový 5 bodů z útoku
@@ -187,7 +187,7 @@ class Ukol_3: # 3 . úkol s vojákem a hra kámen nůžky papír
                 hrdina.seznam_veci.append("Vojákův štít")  # přidání štítů a všch jeho astributů do příslušných seznamů.
                 hrdina.popis_veci.append("vylepšit tvoji obranu")
                 hrdina.ucinek_veci.append(5)
-                hrdina.hlad += 5
+                hrdina.zasoba_jidla += 5
 
 
 
@@ -247,7 +247,7 @@ class Ukol_4: # 4 ukol na hádání hesla do věže
 
         if "_" not in self.nahodne_slovo and hrdina.zivoty>0: # podmínka pro vítězství ve hře
             print("Brána se otevřela a ty můžeš vstoupit ")
-            hrdina.hlad += 5
+            hrdina.zasoba_jidla += 5
 
 
 ukol4=Ukol_4()
@@ -296,7 +296,7 @@ Konec vsuvky a hurá do boje""")
                 print()
                 print(f"tvoje aktuální vytrvalost je {self.vytrvalost}")
                 print(f"{self.postava1.graficky_zivot()}")
-                print(f"{self.postava1.graficky_hlad()}")
+                print(f"{self.postava1.graficka_zasoba_jidla()}")
                 print(f"Drakuv {self.postava2.graficky_zivot()}\n")
                 print()
 
@@ -308,7 +308,7 @@ Konec vsuvky a hurá do boje""")
                 print()
                 print(f"tvoje aktuální vytrvalost je {self.vytrvalost}")
                 print(f"{self.postava1.graficky_zivot()}")
-                print(f"{self.postava1.graficky_hlad()}")
+                print(f"{self.postava1.graficka_zasoba_jidla()}")
                 print(f"Drakuv {self.postava2.graficky_zivot()}\n")
                 print()
 

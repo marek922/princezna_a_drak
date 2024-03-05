@@ -17,7 +17,7 @@ pocatecni_cas = time.time()
 vlastni_jmeno = str(input("Jak ti máme říkat dobrodruhu?\n"))
 
 print(f"""Skvěle {vlastni_jmeno} teď budeš mít za úkol rozdělit 10 dovednostních bodů mezi tyto atributy:
-Životy, Útok, Obrana, Inteligence a Odolnost proti hladu. Rozděluj uvážlivě a pamatuj, jen 10 bodů!\n """)
+Životy, Útok, Obrana, Inteligence a zbytek přidáme do zásob jídla. Rozděluj uvážlivě a pamatuj, jen 10 bodů!\n """)
 
 
 def zadani_hodnot(text):
@@ -41,9 +41,9 @@ while celkem != pokus_cislo:  # postupné přiřazování hodnot pomocí funkce 
     utok_dodatek = zadani_hodnot("Kolik bodů přičteš k útoku? Čím více, tím větší rány budeš rozdávat\n")
     obrana_dodatek = zadani_hodnot("Kolik bodů přičteš k obraně? Čím více, tím silnější tvůj štít bude\n")
     inteligence_dodatek = zadani_hodnot("Kolik bodů přičteš k inteligenci? Důvtip by se neměl podceňovat\n")
-    hlad_dodatek = zadani_hodnot("Kolik bodů přičteš k potřebě jíst? Čím více, tím méně budeš muset jíst\n")
+    jidlo_dodatek = zadani_hodnot("Kolik bodů přičteš k zásobě jídla? Čím více, tím více ho budeš mít a jídlo se vždy hodí:)\n")
     print()
-    celkem = zivot_dodatek + utok_dodatek + obrana_dodatek + inteligence_dodatek + hlad_dodatek
+    celkem = zivot_dodatek + utok_dodatek + obrana_dodatek + inteligence_dodatek + jidlo_dodatek
 
     if celkem < pokus_cislo:
         print("Nejspíš neumíš moc dobře počítat. Nějaké body ti ještě zbyly, zkus to znovu.")
@@ -61,9 +61,9 @@ hrdina.zivoty += zivot_dodatek
 hrdina.utok += utok_dodatek
 hrdina.obrana += obrana_dodatek
 hrdina.inteligence += inteligence_dodatek
-hrdina.hlad += hlad_dodatek
+hrdina.zasoba_jidla += jidlo_dodatek
 hrdina.max_zivot += zivot_dodatek
-hrdina.max_hlad += hlad_dodatek
+hrdina.max_zasoba_jidla+= jidlo_dodatek
 print(hrdina)  # vypsání instance hrdina
 
 print()
@@ -117,7 +117,7 @@ while hrdina.je_nazivu():  # samotný průběh hrou
 
     if volba == 1:
         delka_chuze = float(input("""Na jak dlouho se chceš projít? Čím déle půjdeš, tím větší hlad budeš mít,
-         ale můžeš najít zajímavější věci. Jedna jednotka procházky, sníží tvoji uroveň najezení o 1.
+         a více jídla sníš. Ale můžeš najít zajímavější věci. Jedna jednotka procházky, spotřebuje jedno jídlo.
 
          Můžeš jít o 1 jednotku, o 3 jednotky, nebo o 5 jednotek 
 
@@ -179,7 +179,7 @@ while hrdina.je_nazivu():  # samotný průběh hrou
 
     if volba == 4:
         print(hrdina.graficky_zivot())
-        print(hrdina.graficky_hlad())
+        print(hrdina.graficka_zasoba_jidla())
     if volba == 5:
         print(pokyny)
 

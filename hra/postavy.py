@@ -86,38 +86,38 @@ class Postava:
 
 
 class Hrdina(Postava):
-    def __init__(self, jmeno, zivoty, utok, obrana, inteligence, kostka, hlad ):
+    def __init__(self, jmeno, zivoty, utok, obrana, inteligence, kostka, zasoba_jidla ):
         """
         Třída pro hlavního hlavního hrdinu příběhu. Třída vychází s třídy Postava
-        :param hlad: Když hodnota hladu klesena na nula, tak postava začne ztrácet životy
+        :param Zasoba-jidla: Když hodnota  klesena na nula, tak postava začne ztrácet životy
         """
         super().__init__(jmeno, zivoty, utok, obrana, inteligence, kostka)
-        self.hlad=hlad # aktuální úroveň hladu
-        self.max_hlad=hlad #maximální uroveň hladu
+        self.zasoba_jidla=zasoba_jidla # aktuální úroveň hladu
+        self.max_zasoba_jidla=zasoba_jidla #maximální uroveň hladu
 
     def __str__(self):
         """
         Textový výpis Hrdiny
         """
         return str(f"""Ahoj, já jsem hrdina {self.jmeno} mám {self.zivoty} životů, útočím za {self.utok} bodů a můj štít vydrží až {self.obrana} ran.
-Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sice nevzali, ale moje inteligence dosahuje {self.inteligence} bodů.
+Jsem docela jedlík, ale mám u sebe  {self.zasoba_jidla} porcí jídla. Do menzy mě sice nevzali, ale moje inteligence dosahuje {self.inteligence} bodů.
         Ale teď už dost keců a hurá za dobrodružstvím .""")
 
     def jez (self):
         """
-        Metoda která ubírá míru nasicení a podku kledne na nulu,  tak začne ubírat životy
-        :return: upravenou hodnitu nasícení, popřápadě životů
+        Metoda která ubírá zásobu jídla a pokud kledne na nulu,  tak začne ubírat životy
+        :return: upravenou hodno zásoby jídla, popřápadě životů
         """
-        self.hlad-=1
-        if self.hlad <0:
-            self.hlad=0
+        self.zasoba_jidla-=1
+        if self.zasoba_jidla <0:
+            self.zasoba_jidla=0
             self.zivoty-=1
 
-    def graficky_hlad(self):
+    def graficka_zasoba_jidla(self):
         """
-        Grafické znázornění hladu
+        Grafické znázornění zásob jídla
         """
-        return self.graficky_ukazatel(self.hlad, self.max_hlad, "hladu")
+        return self.graficky_ukazatel(self.zasoba_jidla, self.max_zasoba_jidla, "Zásob jídla")
 
     hrdina_ma_tlumok="ano"
     seznam_veci=[] # sem se ukládá název nalezenách věcí
@@ -138,7 +138,7 @@ Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sic
             for polozka in range(len(self.seznam_veci)):
                 print(f"{polozka} - {self.seznam_veci[polozka]} - Pomúže ti {self.popis_veci[polozka]} - Díky tomu máš vylepšení {self.ucinek_veci[polozka]}")
         print()
-        print(f"Tvoje aktální schopnosti jsou: Životy: {self.zivoty}, Útok: {self.utok}, Obrana: {self.obrana}, Inteligence: {self.inteligence}, Hlad: {self.hlad},\n")
+        print(f"Tvoje aktální schopnosti jsou: Životy: {self.zivoty}, Útok: {self.utok}, Obrana: {self.obrana}, Inteligence: {self.inteligence}, Zásoby jidla: {self.zasoba_jidla} ks,\n")
 
     def pouzij (self):
         """
@@ -163,7 +163,7 @@ Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sic
             if "kniha" in self.seznam_veci[index]: # pokud položka pod zvoleným indexem obsahuje slovo "kniha" tak zvedne úroveň inteligence
                 self.inteligence += int(self.ucinek_veci[index])
             if "boruvka" in self.seznam_veci[index]:# pokud položka pod zvoleným indexem obsahuje slovo "boruvka" tak zvedne úroveň hladu
-                self.hlad += int(self.ucinek_veci[index])
+                self.zasoba_jidla += int(self.ucinek_veci[index])
 
             print(f"Skvěle, použil jsi {self.seznam_veci[index]}")
             #print(f"Tvoje aktální schopnosti jsou: Životy: {self.zivoty}, Útok: {self.utok}, Obrana: {self.obrana}, Inteligence: {self.inteligence}, Hlad: {self.hlad},")
@@ -172,6 +172,6 @@ Jsem docela jedlík, hlad začnu mít po {self.hlad} hodinách. Do menzy mě sic
             del self.ucinek_veci[index] # vymaže účinek zvolené položky
 
 
-hrdina=Hrdina(None,10,10,10,10,kostka.desetistena,10) # instance Hlavního hrdiny
+hrdina=Hrdina(None,10,10,10,10,kostka.sestisnna,10) # instance Hlavního hrdiny
 drak=Postava("Šmak", 20, 20, 20, 10, kostka.sestisnna) # instance Hlavního záporáka
 
