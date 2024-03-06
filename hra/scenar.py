@@ -96,8 +96,12 @@ def treti_ukol(): # pokyny k třetímu ukolu
     print()
     hlavni_dejova_linka.ukol3.kamen_nuzky_papir()
 
+def sesty_ukol(): # jen přidává životy
+    print(hlavni_dejova_linka.ukol6)
+    hlavni_dejova_linka.ukol6.spanek()
 
-seznam_ukolu=[prvni_ukol,druhy_ukol,treti_ukol] #seznam dostupných úkolů
+
+seznam_ukolu=[prvni_ukol,druhy_ukol,treti_ukol,sesty_ukol] #seznam dostupných úkolů
 
 def aktyvni_ukol(): # náhodně vybere úkol ze seznamu, spustí ho a pak smaže, aby se neopakoval
     ukol=random.choice(seznam_ukolu)

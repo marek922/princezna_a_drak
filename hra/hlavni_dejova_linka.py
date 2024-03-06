@@ -311,7 +311,21 @@ Konec vsuvky a hurá do boje""")
                 print(f"{self.postava1.graficka_zasoba_jidla()}")
                 print(f"Drakuv {self.postava2.graficky_zivot()}\n")
                 print()
+            else:
+                print("Tak znovu a pořádně")
 
 ukol5=Ukol_5(hrdina,drak)
 
 
+class Ukol_6:
+    def __str__(self):
+        return str ("""Našel jsi krásný palouček, který tě přímo vybízel ke spánku. Neodolal jsi a na chvilku jsi si zdřímnul.
+        
+        Vzbudil jsi se krásně odpočatý a říkáš si, že už jsi se dlouho tak hezky bevyspal. 
+        
+        Získáváš 5 životů """)
+
+    def spanek(self):
+        hrdina.zivoty+=5
+
+ukol6=Ukol_6()
