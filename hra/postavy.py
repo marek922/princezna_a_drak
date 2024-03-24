@@ -38,13 +38,13 @@ class Postava:
         """
 
         if aktulani==(maxilmani/2):
-            return f"Aktuální počet {popis} je {aktulani} [{'-'*(maxilmani-aktulani)}{'X'*aktulani}]\n Jsi v půlce {popis}"
+            return f"Aktuální počet {popis} je {aktulani} [{'-' * int((maxilmani - aktulani))}{'X' * int(aktulani)}]\n Jsi v půlce {popis}"
         if aktulani==3:
-            return f"Aktuální počet {popis} je {aktulani} [{'-' * (maxilmani - aktulani)}{'X' * aktulani}]\n Nechci tě stresovat, ale zbývají ti jen 3 jednotky {popis}"
+            return f"Aktuální počet {popis} je {aktulani} [{'-' * int((maxilmani - aktulani))}{'X' * int(aktulani)}]\n Nechci tě stresovat, ale zbývají ti jen 3 jednotky {popis}"
         if aktulani==1:
-            return f"Aktuální počet {popis} je {aktulani} [{'-' * (maxilmani - aktulani)}{'X' * aktulani}]\n Konec se blíží !!! "
+            return f"Aktuální počet {popis} je {aktulani} [{'-' * int((maxilmani - aktulani))}{'X' * int(aktulani)}]\n Konec se blíží !!! "
         else:
-            return f"Aktuální počet {popis} je {aktulani} [{'-' * (maxilmani - aktulani)}{'X' * aktulani}]"
+            return f"Aktuální počet {popis} je {aktulani} [{'-' * int((maxilmani - aktulani))}{'X' * int(aktulani)}]"
 
 
     def graficky_zivot(self):
@@ -113,7 +113,7 @@ Jsem docela jedlík, ale mám u sebe  {self.zasoba_jidla} porcí jídla. Do menz
             self.zasoba_jidla=0
             self.zivoty-=1
 
-    def graficka_zasoba_jidla(self):
+    def  graficka_zasoba_jidla(self):
         """
         Grafické znázornění zásob jídla
         """
@@ -149,27 +149,44 @@ Jsem docela jedlík, ale mám u sebe  {self.zasoba_jidla} porcí jídla. Do menz
             index=int(input("Kterou položku chceš využít?\n")) # uživatel zádá jakou položku che použít
         except ValueError:
             print("Zadávej jen čísla, jinak ti nebudu rozument.") # pokud nezadá číslo, ale slovo tak se hodnota nastaví na číslo přesahující požadovaný limit
-            index=len(hrdina.seznam_veci)+2
+            index=None
 
-        if index <0 or index >= len(self.seznam_veci):
-            print("Netuším, jak jsi na to přišel, ale takovou položku v tlumoku nemáš")
-        else:
-            if "voda" in self.seznam_veci[index]: # pokud položka pod zvoleným indexem obsahuje slovo "voda" tak zvedne úroveň životů
-                self.zivoty += int(self.ucinek_veci[index])
-            if "meč" in self.seznam_veci[index]:  # pokud položka pod zvoleným indexem obsahuje slovo "meč" tak zvedne úroveň útoků
-                self.utok += int(self.ucinek_veci[index])
-            if "štít" in self.seznam_veci[index]: # pokud položka pod zvoleným indexem obsahuje slovo "štít" tak zvedne úroveň obrany
-                self.obrana += int(self.ucinek_veci[index])
-            if "kniha" in self.seznam_veci[index]: # pokud položka pod zvoleným indexem obsahuje slovo "kniha" tak zvedne úroveň inteligence
-                self.inteligence += int(self.ucinek_veci[index])
-            if "boruvka" in self.seznam_veci[index]:# pokud položka pod zvoleným indexem obsahuje slovo "boruvka" tak zvedne úroveň hladu
-                self.zasoba_jidla += int(self.ucinek_veci[index])
+        if index is not None:
+            if index<0 or index >= len(self.seznam_veci):
+                print("Netuším, jak jsi na to přišel, ale takovou položku v tlumoku nemáš")
+            else:
+                if "voda" in self.seznam_veci[index]: # pokud položka pod zvoleným indexem obsahuje slovo "voda" tak zvedne úroveň životů
+                    self.zivoty += int(self.ucinek_veci[index])
+                if "meč" in self.seznam_veci[index]:  # pokud položka pod zvoleným indexem obsahuje slovo "meč" tak zvedne úroveň útoků
+                    self.utok += int(self.ucinek_veci[index])
+                if "štít" in self.seznam_veci[index]: # pokud položka pod zvoleným indexem obsahuje slovo "štít" tak zvedne úroveň obrany
+                    self.obrana += int(self.ucinek_veci[index])
+                if "kniha" in self.seznam_veci[index]: # pokud položka pod zvoleným indexem obsahuje slovo "kniha" tak zvedne úroveň inteligence
+                    self.inteligence += int(self.ucinek_veci[index])
+                if "boruvka" in self.seznam_veci[index]:# pokud položka pod zvoleným indexem obsahuje slovo "boruvka" tak zvedne úroveň hladu
+                    self.zasoba_jidla += int(self.ucinek_veci[index])
 
-            print(f"Skvěle, použil jsi {self.seznam_veci[index]}")
-            #print(f"Tvoje aktální schopnosti jsou: Životy: {self.zivoty}, Útok: {self.utok}, Obrana: {self.obrana}, Inteligence: {self.inteligence}, Hlad: {self.hlad},")
-            del self.seznam_veci[index] # vymaže název zvolené položky
-            del self.popis_veci[index] # vymaže popis zvolené položky
-            del self.ucinek_veci[index] # vymaže účinek zvolené položky
+                print(f"Skvěle, použil jsi {self.seznam_veci[index]}")
+                #print(f"Tvoje aktální schopnosti jsou: Životy: {self.zivoty}, Útok: {self.utok}, Obrana: {self.obrana}, Inteligence: {self.inteligence}, Hlad: {self.hlad},")
+                del self.seznam_veci[index] # vymaže název zvolené položky
+                del self.popis_veci[index] # vymaže popis zvolené položky
+                del self.ucinek_veci[index] # vymaže účinek zvolené položky
+
+    def restart_postavy(self): # vyresetuje postavu na opočateční stav
+        hrdina.zivoty=10
+        hrdina.max_zivot=hrdina.zivoty
+        hrdina.utok=10
+        hrdina.obrana=10
+        hrdina.inteligence=10
+        hrdina.zasoba_jidla=10
+        hrdina.max_zasoba_jidla=hrdina.zasoba_jidla
+        hrdina.kostka=kostka.sestisnna
+        hrdina.seznam_veci.clear()
+        hrdina.popis_veci.clear()
+        hrdina.ucinek_veci.clear()
+        hrdina.hrdina_ma_tlumok ="ano"
+        drak.zivoty=20
+        drak.max_zivot=drak.zivoty
 
 
 hrdina=Hrdina(None,10,10,10,10,kostka.sestisnna,10) # instance Hlavního hrdiny

@@ -9,13 +9,13 @@ class Les1: #nizka obtiznost
         self.ucinek_nalez = [1,1,1,1,2]
         self.nahodny_index = None
 
-    def prochazej_se(self):
+    def prochazej_se(self,sance_na_zraneni=0):
         """
         Vybere náhodný index a podle něj přidá do seznamu věcí danou položku, pokud je index mimo seznam, ubere hrdinovy životy.
         :return: hrdiny upravené seznamy, popřípadě ubraní životy
         """
         try:
-            self.nahodny_index=random.randint(0,len(self.seznam_nalez)+0)
+            self.nahodny_index=random.randint(0,len(self.seznam_nalez)+sance_na_zraneni-1)
             hrdina.seznam_veci.append(self.seznam_nalez[self.nahodny_index])
             hrdina.popis_veci.append(self.popis_nalez[self.nahodny_index])
             hrdina.ucinek_veci.append(self.ucinek_nalez[self.nahodny_index])
@@ -30,7 +30,7 @@ class Les1: #nizka obtiznost
             return str (f""""Skvěle, procházel jsi se a našel jsi následující:
             {self.seznam_nalez[self.nahodny_index]}. tahle vec ti pomůže {self.popis_nalez[self.nahodny_index]}, přidá ti {self.ucinek_nalez[self.nahodny_index]}""")
         except IndexError:
-            return str ("Sakra, máš smůlu, šlápl jsi na ostrou větev a přicházíš o 2 životy")
+            return str ("Sakra, máš smůlu, šlápl jsi na ostrou větev a přicházíš o 2 životy\n")
 
 les1=Les1()
 
@@ -43,13 +43,13 @@ class Les2:#stredni obtiznost
         self.ucinek_nalez = [3,3,3,3,6]
         self.nahodny_index = None
 
-    def prochazej_se(self):
+    def prochazej_se(self, sance_na_zraneni=0):
         """
         Stejné, jaké třída Les 1, jen s pozměněnými položkami
         """
 
         try:
-            self.nahodny_index = random.randint(0, len(self.seznam_nalez) + 1)
+            self.nahodny_index = random.randint(0, len(self.seznam_nalez)+sance_na_zraneni-1)
             hrdina.seznam_veci.append(self.seznam_nalez[self.nahodny_index])
             hrdina.popis_veci.append(self.popis_nalez[self.nahodny_index])
             hrdina.ucinek_veci.append(self.ucinek_nalez[self.nahodny_index])
@@ -64,7 +64,7 @@ class Les2:#stredni obtiznost
             return str(f""""Šel jsi hlouběji do lesa se a našel jsi následující:
             {self.seznam_nalez[self.nahodny_index]}. tahle věc ti pomůže {self.popis_nalez[self.nahodny_index]}, přidá ti {self.ucinek_nalez[self.nahodny_index]}""")
         except IndexError:
-            return str("Ty jsi tu díru vážně neviděl? Přicházíš o 4 životy ")
+            return str("Ty jsi tu díru vážně neviděl? Přicházíš o 4 životy \n")
 
 
 les2 = Les2()
@@ -77,12 +77,12 @@ class Les3: #nejvyssí obtiznost
         self.ucinek_nalez = [5,5,5,5,10]
         self.nahodny_index = None
 
-    def prochazej_se(self):
+    def prochazej_se(self, sance_na_zraneni=0):
         """
          Stejné, jaké třída Les 1, jen s pozměněnými položkami
         """
         try:
-            self.nahodny_index = random.randint(0, len(self.seznam_nalez) + 2)
+            self.nahodny_index = random.randint(0, len(self.seznam_nalez)+sance_na_zraneni)
             hrdina.seznam_veci.append(self.seznam_nalez[self.nahodny_index])
             hrdina.popis_veci.append(self.popis_nalez[self.nahodny_index])
             hrdina.ucinek_veci.append(self.ucinek_nalez[self.nahodny_index])
@@ -97,7 +97,7 @@ class Les3: #nejvyssí obtiznost
             return str(f"""Strávil jsi v lese celý den a našel jsi následující:
             {self.seznam_nalez[self.nahodny_index]}. tahle vec ti pomůže {self.popis_nalez[self.nahodny_index]}, přidá ti {self.ucinek_nalez[self.nahodny_index]}""")
         except IndexError:
-            return str("Potkal jsi medvěda a nebyl příliš přátelský, přicházíš o 6 životů")
+            return str("Potkal jsi medvěda a nebyl příliš přátelský, přicházíš o 6 životů\n")
 
 
 les3 = Les3()

@@ -4,6 +4,23 @@ from postavy import hrdina
 import kostka
 from postavy import drak
 
+def zadani_hodnot(text, min_moznost=None, max_moznost=None):
+    """
+    Metoda pro zadávání hodnot s upozorněním na jinou hodnotu než číslo
+    :param text: Zadaná hodnota
+    :parm min_moznost: Nejmenší povolená hodnota
+    :parm max_moznost: Největší maximální hodnota
+    """
+    while True:
+        try:
+            hodnota = int(input(text))
+            if (min_moznost is None or hodnota >= min_moznost) and (max_moznost is None or hodnota <= max_moznost):
+                return hodnota
+            else:
+                print(f"Zadej prosím tě jen číslo v rozmezí {min_moznost} a {max_moznost}\n")
+        except ValueError:
+            print("Takhle to nepůjde. Zadej prosím pouze celé číslo\n")
+
 class Ukol_1:  # první úkoly, ve kterém je potřeba uhodnout náhodné číslo, uspěch přidá meč s utokem z 5 a nesupěch odebere 5 nasicení
     def __init__(self, pokusy):
         """
@@ -32,7 +49,12 @@ Souhlasíš, ale poprosíš je alespoň o malinkou nápovědu. Prý je to něco 
         :return:vrací meč na vylepšení životů nebo snížený atribut hladu
         """
         while self.cislo != self.odpoved and self.pocet_pokusu != 0: #hráč hádá dokud mu nedojdou pokusy, nebo neuhodl číslo
-            self.odpoved = int(input("Zadej tvůj tip "))
+            try:
+                self.odpoved = int(input("Zadej tvůj tip "))
+            except ValueError:
+                print("Stačít zadat číslo mezi 1 a 10. To co jsi zadal určitě nebylo číslo.")
+                self.odpoved=15
+
             if self.odpoved < self.cislo:
                 print()
                 print("Zkus něco většího")
@@ -118,6 +140,9 @@ class Ukol_2:
             hrdina.ucinek_veci.clear() # smaže položky v ucinku věcci u hrdiny
             hrdina.hrdina_ma_tlumok="ne"
 
+        self.spravna_odpoved=0
+        self.pokus=0
+
 ukol2=Ukol_2()
 
 
@@ -125,8 +150,8 @@ ukol2=Ukol_2()
 class Ukol_3: # 3 . úkol s vojákem a hra kámen nůžky papír
 
     def __init__(self):
-        self.hrac_vyhra=0
-        self.vojak_vyhra=0
+        self.hrac_vyhra=0 #zresetování pro další hru
+        self.vojak_vyhra=0 #zresetování pro další hru
 
     def __str__(self):
         """
@@ -141,7 +166,7 @@ class Ukol_3: # 3 . úkol s vojákem a hra kámen nůžky papír
         Samotná hra kámen nůžky papír
         :return: podle volby hráče, hrdina získá štít, nebo přijde o 5 bodů útoku, popřípadě o 10 životů
         """
-        volba=int(input("Chceš si s ním zahrát ? zvol 1 Chceš raději odejít? zvol 2 Chceš ho praštít, vzít štít a utéct? zvol 3\n"))
+        volba=zadani_hodnot("Chceš si s ním zahrát ? zvol 1 Chceš raději odejít? zvol 2 Chceš ho praštít, vzít štít a utéct? zvol 3\n",1,3)
         if volba == 1:
             while self.hrac_vyhra != 3 and self.vojak_vyhra != 3:
                 moznosti = ["kamen", "nuzky", "papir"]
@@ -174,6 +199,10 @@ class Ukol_3: # 3 . úkol s vojákem a hra kámen nůžky papír
             else:
                 print("Tak jsem zas vyhrál. Už to začíná být nuda. Dej mi svůj meč a pokračuj dál. ")
                 hrdina.utok-=5 # odebere hrdinový 5 bodů z útoku
+
+            self.hrac_vyhra=0 #zresetování pro další hru
+            self.vojak_vyhra=0 #zresetování pro další hru
+
         if volba ==2:
             print("Mávneš nad tím rukou a pokračuješ dál ")
         if volba ==3:
@@ -195,15 +224,16 @@ ukol3=Ukol_3()
 
 class Ukol_4: # 4 ukol na hádání hesla do věže
 
-    def __init__(self):
+    def __init__(self, obtiznost_heslo):
         """
         slova je seznam možností, z kterých může program vybírat
         náhodné slovo je slovo, který prohram vybral
         počet pokusů je počet pokusů , který hráč má, než mu začnou mizet životy
         """
         self.slova = ["vytrvalost", "odvaha", "statecnost", "hrdina", "slava", "obetavost", "prsten", "udatnost", "respekt", "programator"]
-        self.nahodne_slovo=self.slova[random.randint(0, len(self.slova)-1)]
-        self.pocet_pokusu = 5
+        self.nahodne_slovo=None
+        self.obtiznost_heslo=obtiznost_heslo
+        self.pocet_pokusu = 5+self.obtiznost_heslo
     def __str__(self):
         """
         Textový úvod k úkolu se vstupem do věže
@@ -216,6 +246,7 @@ class Ukol_4: # 4 ukol na hádání hesla do věže
         Samotná hra na hádání hesla
         :return: ubrané životy, pokud hráč neuhodne slovo na příšluný počet životů
         """
+        self.nahodne_slovo = self.slova[random.randint(0, len(self.slova) - 1)] #vybere náhodné slovo ze seznamu
         skyte_slovo=[] #nahradí všechna písmena ve skrytém slově pomlčekou a nahraje je do seznamu
         for pismeno in self.nahodne_slovo:
             skyte_slovo.append("_")
@@ -249,8 +280,9 @@ class Ukol_4: # 4 ukol na hádání hesla do věže
             print("Brána se otevřela a ty můžeš vstoupit ")
             hrdina.zasoba_jidla += 5
 
+        self.pocet_pokusu=5+self.obtiznost_heslo #reset pro další hru
 
-ukol4=Ukol_4()
+
 
 class Ukol_5:
 
@@ -278,8 +310,10 @@ Konec vsuvky a hurá do boje""")
         Princip překvapení - náhodné číslo a podkud je větší než 5. tak neútočí hráč, ale drak.
         :return: Smrt jedné z postav
         """
+
+        opotrebeni_stitu=0
         while self.postava1.je_nazivu() and self.postava2.je_nazivu(): #cyklus běží, dokud je jedna z postav na živu
-            styl_boje=int(input("Chceš zaútočit, nebo se bránit? pro útok stiskni 1 a pro obranu 2\n"))
+            styl_boje=zadani_hodnot("Chceš zaútočit, nebo se bránit? pro útok stiskni 1 a pro obranu 2\n",1,2)
             if styl_boje==1:
                 self.vytrvalost-=1 # při útoku klesne vytrvalost o 1
                 if self.vytrvalost>=0: # pokud je vytrvalost rovna, nebo větší než 0 provede se běžný útok
@@ -301,7 +335,12 @@ Konec vsuvky a hurá do boje""")
                 print()
 
             if styl_boje==2:
+                opotrebeni_stitu += 1  # počíta obraných kol
                 self.vytrvalost+=1
+                if opotrebeni_stitu>6:
+                    print("Boj se začíná protahovat a tvůj štít se začíná rozpadad")
+                    print("S každým dalším útokem tvoje obrana klesna o 2 body")
+                    self.postava1.obrana-=2
                 if self.vytrvalost>5:
                     self.postava1.zivoty+=5
                 self.postava2.utoc(self.postava1)
@@ -311,8 +350,10 @@ Konec vsuvky a hurá do boje""")
                 print(f"{self.postava1.graficka_zasoba_jidla()}")
                 print(f"Drakuv {self.postava2.graficky_zivot()}\n")
                 print()
-            else:
-                print("Tak znovu a pořádně")
+
+
+        self.vytrvalost=2 #vyresetování pro další boj
+    opotrebeni_stitu=0
 
 ukol5=Ukol_5(hrdina,drak)
 
@@ -327,5 +368,97 @@ class Ukol_6:
 
     def spanek(self):
         hrdina.zivoty+=5
+        hrdina.zasoba_jidla += 5
 
 ukol6=Ukol_6()
+
+
+class Ukol_7:
+
+    def __init__(self, uroven, zaporna_cisla="ano"):
+        self.uroven = uroven
+        self.zaporna_cisla = zaporna_cisla
+        self.cas_na_hru = 30
+
+    def __str__(self):
+        return str(f""" Jdeš přímo k věži, když pod stromem uvidíš chlapce se co trápí s domácím úkolem.  
+        Moc dobře víš, jak dokáže být matematika těžká a nabídneš mu tedy svoji pomoc. 
+        Chlapec má velikou radost a slibuje ti něco z tátovi výbavy, ale musíte to stihnout dříve, 
+        než se vrátí z práce.  \n """)
+
+    def pocitej(self):
+        vyhra = 11 - self.uroven
+        spravna_odpoved = 0
+        zbyly_cas = 100  # zbylý čas je nastaven na hodnotu 100 po spuštění funkce se aktualilzuje
+        self.cas_na_hru = 30  # udává kolik vteřin hráč má na spočítání příkladů
+
+        print()
+        input(f"""Čeká tě {vyhra} příkladů za {self.cas_na_hru} vteřin. 
+
+            Až budeš připrave, stiskni libovolnou klavesu .\n""")
+
+        start = time.time()
+        while zbyly_cas > 0 and spravna_odpoved != vyhra:
+            a = random.randint(0, 10)
+            b = random.randint(1, 10)  # Nulou nelze dělit, takže bude minimálně 1
+            operace = ["+", "-", "*", "/"]
+            znamenko = random.choice(operace)
+
+            if znamenko == "+":
+                priklad = a + b
+            elif znamenko == "-":
+                priklad = a - b
+                if self.zaporna_cisla == "ne":  # pokud je hodnota nastavena na ne, tak progra, vynechává příklady kde je záporný výsledek
+                    while a - b < 0:
+                        a = random.randint(0, 10)
+                        b = random.randint(1, 10)
+                        priklad = a - b
+            elif znamenko == "*":
+                priklad = a * b
+            elif znamenko == "/":
+                while a % b != 0:  # vynechává příklady, kde dělení vychází se zbytkem
+                    a = random.randint(0, 10)
+                    b = random.randint(1, 10)
+                priklad = a / b
+
+            print(f"{a} {znamenko} {b}")
+            try:
+                vysledek = float(input("Zadej výsledek: "))
+            except ValueError:
+                print("Bohužel jsi nezadal číslo ")
+                vysledek = 101
+
+            if vysledek == priklad:
+                spravna_odpoved += 1
+                print(f"Správně! Máš {spravna_odpoved} správných odpovědí.")
+            else:
+                print(f"Špatně. Správný výsledek byl: {priklad}")
+
+            aktualni_cas = time.time()
+            zbyly_cas = int(self.cas_na_hru - (aktualni_cas - start))
+            if zbyly_cas > 0:
+                print(f"Zbývá ti {zbyly_cas} vteřin")
+            elif zbyly_cas == 0:
+                print("Tohle bylo těsné, došel ti čas ")
+
+            print()
+
+        if spravna_odpoved == vyhra and zbyly_cas >= 0:
+            print("Gratuluji, vyhral jsi\n ")
+            print("Chlapec má velikou radost a ptá se tě, jestli chceš otcuv štít, nebo meč")
+            volba = zadani_hodnot("Pokud chceš štít, zmačkni 1, pokud raději meč zvol 2 ", 1, 2)
+            if volba == 1:
+                hrdina.seznam_veci.append("Otcuv štít")
+                hrdina.popis_veci.append("Pomůže ti s obranou ")
+                hrdina.ucinek_veci.append(5)
+            if volba == 2:
+                hrdina.seznam_veci.append("Otcuv meč")
+                hrdina.popis_veci.append("Díky němu budeš zas o něco silnější  ")
+                hrdina.ucinek_veci.append(5)
+
+            hrdina.zasoba_jidla += 5
+
+        elif spravna_odpoved == vyhra and zbyly_cas < 0:
+            print(f"Smůla, ten posdlední příklad už jsi nestihl v limitu... chybělo ti {int(zbyly_cas * -1)} vteřin")
+        else:
+            print("Smůla nestihl jsi to, došel ti čas ")
