@@ -348,14 +348,12 @@ Konec vsuvky a hurá do boje""")
                 print(f"tvoje aktuální vytrvalost je {self.vytrvalost}")
                 print(f"{self.postava1.graficky_zivot()}")
                 print(f"{self.postava1.graficka_zasoba_jidla()}")
-                print(f"Drakuv {self.postava2.graficky_zivot()}\n")
+                print(f"{self.postava2.jmeno} {self.postava2.graficky_zivot()}\n")
                 print()
 
 
         self.vytrvalost=2 #vyresetování pro další boj
     opotrebeni_stitu=0
-
-ukol5=Ukol_5(hrdina,drak)
 
 
 class Ukol_6:

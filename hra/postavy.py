@@ -187,6 +187,8 @@ Jsem docela jedlík, ale mám u sebe  {self.zasoba_jidla} porcí jídla. Do menz
         hrdina.hrdina_ma_tlumok ="ano"
         drak.zivoty=20
         drak.max_zivot=drak.zivoty
+        drak.utok=20
+        drak.obrana=20
 
 
 hrdina=Hrdina(None,10,10,10,10,kostka.sestisnna,10) # instance Hlavního hrdiny
