@@ -1,6 +1,6 @@
 # princezna_a_drak
 Projekt ke zkoušce
-spoustět v soboru scenař.py 
+spoustět v soboru hraj.py 
 
 Princezna a drak, je textová dobrodružná hra, při které se hráč vynadá zachránit princeznu do rozpadlé věžě. Po cestě narazí na něokolik překážek a hádnek, se kterými si bude muset poradit. Dokážeš mi na této ceste pomoc? 
 
